@@ -34,10 +34,6 @@ There is no direct path to Phase 4. Every code change goes through Phase 3.5. **
 | "I can just self-review, subagent is overhead" | Prefer subagent (independent eyes catch what you missed). Self-review is acceptable for MANUAL-heavy projects. |
 | "User said test passed, I'll update AC later" | User confirming test passed = update AC to `[x]` NOW. Not "later" — immediately. |
 
-## 🚨 Session Startup
-
-On first invocation of this skill in a session, **immediately load `Skill("project-experience")`**. Do NOT reload on subsequent invocations. The experience briefing must be in context before any design or implementation decision is made — designing without past project knowledge repeats known mistakes.
-
 ## Prerequisites
 
 | Skill | Required for | Install |
@@ -198,7 +194,7 @@ Before writing code, grep for callers of the function(s) you're about to modify.
 4. **Already-installed dependency solves it?** Use it. Don't add new deps for what a few lines can do.
 5. **Only then:** design a custom solution, or search for new external libraries.
 
-Present findings to the user as part of the options discussion. **Cross-reference with the project-experience briefing** (already loaded at session startup) — check for known pitfalls and reusable patterns from past projects before committing to a design.
+Present findings to the user as part of the options discussion.
 
 **🚨 HARD GATE: Wait for the user to explicitly say "approved"/"go ahead"/"confirm" before writing any code.** "The user described the problem" is not confirmation. "The user seems to want this" is not confirmation. The user must use an explicit approval word.
 
@@ -261,7 +257,7 @@ Wait for the user to decide before continuing.
 - Gaps/improvements (feature exists): direct implementation
 - Test ACs (Quality): one test file per AC
 
-**Reference:** `project-experience` briefing is already loaded (see Session Startup). Use it: coding style, known pitfalls, reusable patterns.
+**REQUIRED:** Load `Skill("project-experience")` on first Phase 4 entry of the session. Subsequent Mode B calls in the same session do NOT need to reload it.
 
 **🚨 EXIT GATE: You cannot proceed to Phase 5 without completing Phase 4.8.** Implementing code is not done. Reviewing it is done. Proceed to Phase 4.8 now.
 
