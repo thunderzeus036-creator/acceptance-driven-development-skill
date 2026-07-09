@@ -7,7 +7,7 @@ description: Use when building features, fixing bugs, or adding capabilities to 
 
 Execute against a verifiable acceptance criteria checklist, looping until every criterion passes.
 
-**Core principle:** If you can't verify it, you're not done. Only a checklist where every `[ ]` has become `[x]` or `[!]` is completion.
+**Core principle:** Completion has two layers. Agent work is done when zero `[ ]` remain — all requested code is written and self-reviewed. Project is complete when every item has a settled outcome: `[x]` (user-verified), `[>]` (explicitly deferred), or `[-]` (explicitly deprecated).
 
 ## 🚨 FIRST RULE — Check Before You Code
 
@@ -142,7 +142,7 @@ Read the AC table. For each row, read the status column:
 | `[~]` | Partially done | → Phase 2 with note |
 | `[x]` | Verified passing | Skip |
 | `[-]` | Deprecated | Skip |
-| `[!]` | Implemented, awaiting user | → Phase 6 checklist |
+| `[!]` | Implemented, awaiting user | Present in Phase 6; user tests → mark `[x]` |
 | `[>]` | Deferred / backlog | Skip. This is a user-facing marker — agent does NOT suggest implementing it unless the user explicitly requests it. |
 
 No `[ ]` items? → the AC table is up to date. If the user requested a change, proceed to Phase 3.5. If just checking status, present the `[!]` checklist.
@@ -279,7 +279,7 @@ Wait for the user to decide before continuing.
 
 ### Phase 4.8: Review
 
-After code compiles, **before** marking `[!]` or `[x]`. **Match review mode to execution mode** — Mode A execution → Mode A review. Mode B execution → Mode B review.
+After code compiles. Mode A marks in Phase 5, not here. Mode B marks `[!]` after review passes. **Match review mode to execution mode** — Mode A execution → Mode A review. Mode B execution → Mode B review.
 
 **Review checklist (5 items, for both modes):**
 1. **Wiring** — events, callbacks, signal/slot connections correct? Targets alive?
@@ -327,7 +327,9 @@ After marking all items, proceed to Phase 6 to check completion.
 ```
 Phase 5 →
   ├── Any AUTO [ ] remaining? → Phase 4 (MANDATORY)
-  └── No [ ] items? → Present [!] checklist to user → user confirms → mark [x] → project doc
+  └── No [ ] items? → [!] checklist → user test → [x]
+                     → [~] items → settle: [x] / [>] / [-]
+                     → All [x] [>] [-]? → project doc
 ```
 
 **🚨 Exit condition: zero `[ ]` items.** Before saying "done": re-read AC, count `[ ]`. If any remain → back to Phase 4 Mode A (batch process all remaining items).
@@ -376,7 +378,7 @@ Phase 1-3: triage + sort + classify
 Phase 4 Mode A: implement all AUTO items in batch
 Phase 4.8 Mode A: one subagent reviews the batch → PASS
 Phase 5: verify AUTO → [x], mark MANUAL/BLOCKED → [!]
-Phase 6: present [!] checklist → done
+Phase 6: present [!] checklist → user tests → mark [x] → project doc → done
 ```
 
 ### Example 2: Quality ACs (Tests)
@@ -396,8 +398,8 @@ FIRST RULE: not in AC table → stop
 Phase 3.5: add AC-33b → propose: "Add × button next to tag chips, confirm dialog on click"
          → user says "approved" → confirmed
 Phase 4 Mode B: implement → self-review → PASS → mark [!]
-Phase 5: user verifies → mark [x]
-Phase 6: continue with remaining ACs
+Phase 5: user verifies → mark [x] (event-driven, anytime user says "passed")
+Phase 6: check if more [ ]/[!] remain; if all settled → project doc → done
 ```
 
 ---
