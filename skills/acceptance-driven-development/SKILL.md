@@ -184,6 +184,8 @@ Before writing code, grep for callers of the function(s) you're about to modify.
 
 **Default to Medium when uncertain.** If a change could be Small or Medium, classify it as Medium. The cost of over-discussing (1 extra minute) is lower than the cost of wrong direction (hours of rework).
 
+**Check experience cache (all sizes):** Before proposing an approach, read `<VAULT>/<DOCS>/memory.md` (the global experience cache maintained by `project-experience`). Scan the `Known Pitfalls` and `Reusable Patterns` sections for anything relevant to the current change. This is a 2-second scan — don't re-load project-experience, just read the file. If you find a relevant pitfall or pattern, mention it when presenting your approach to the user.
+
 **Every size includes a discussion step.** After updating AC, present your proposed approach and wait for the user to say "approved"/"go ahead" before writing code.
 
 **Solution check (Medium and Large):** Before designing a solution, climb this ladder — stop at the first rung that holds:
