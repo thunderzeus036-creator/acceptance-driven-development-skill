@@ -1,141 +1,192 @@
-# Acceptance-Driven Development — Install Kit
+# Acceptance-Driven Development
 
-## What This Is
-
-A Claude Code skill pack that implements **acceptance-criteria-driven development**:
-
-1. **Gate 1** — Agent brainstorms with you → design document → you review
-2. **Gate 2** — Agent drafts acceptance criteria from design → you approve
-3. **Phase 0~6** — Agent executes in batch → self-reviews → verifies → loops until every `[ ]` is `[x]` or `[!]`
+> **The AI skill pack that makes sure "done" actually means done.**
 
 ---
 
-## File Structure
+## Why This Exists
+
+You've told an AI agent to build something. It wrote a bunch of code, compiled, and said "done." But you open the app and half the features are missing, buttons don't work, and three other things broke mysteriously.
+
+**"Done" shouldn't be a feeling. It should be a checklist with all boxes ticked.**
+
+ADD (Acceptance-Driven Development) enforces exactly that — every feature, every fix, every improvement must pass through a verifiable acceptance criteria checklist before the agent is allowed to say "done."
+
+---
+
+## The Core Flow
 
 ```
-english-release/
-├── README.md                              # This file
-├── skills/                                # ← Copy to ~/.claude/skills/
-│   ├── acceptance-driven-development/
-│   │   ├── SKILL.md                       # Main skill (~405 lines)
-│   │   ├── IMPROVEMENT-GUIDE.md           # Design principles for future maintainers
-│   │   └── references/
-│   │       └── framework-review-checklist.md  # Qt/React/Django/Go review checklist
-│   └── project-experience/
-│       └── SKILL.md                       # Sub-skill: project experience extraction
-├── projects/                              # ← Copy to your project docs folder
-│   ├── templates/
-│   │   ├── ac-template.md                 # AC document template
-│   │   └── project-index.md               # Project index (Dataview)
-│   └── AlarmClock/                        # Example project
-│       └── AC.md
-└── codex-port/
-    └── CODEX-ADAPTATION.md                # Codex CLI adaptation guide
+You: "Build me a clock app with countdown timers"
+         │
+         ▼
+   Agent asks clarifying questions (not silently guessing)
+         │
+         ▼
+   Agent writes an Acceptance Criteria document (you review + approve)
+         │
+         ▼
+   Agent implements EVERY item in batch, self-reviews each one
+         │
+         ▼
+   Agent marks items [x] (verified) or [!] (needs your test)
+         │
+         ▼
+   You test [!] items, confirm → agent marks [x]
+         │
+         ▼
+   ANY [ ] still remaining? → Agent goes back and does more work
+         │
+         ▼
+   ALL [x] → Project document auto-generated for future reference
+         │
+         ▼
+   Closed loop: next project auto-learns from this one ✦
 ```
+
+---
+
+## What Makes This Different
+
+| Without ADD | With ADD |
+|-------------|----------|
+| Agent says "done" when code compiles | Agent says "done" when every AC is `[x]` |
+| Agent silently guesses your requirements | Agent asks questions, presents options, waits for confirmation |
+| Agent skips self-review and hopes for the best | Agent self-reviews each change against a 5-item checklist |
+| Changes break other features silently | Impact analysis demotes affected ACs before modifying code |
+| 3 failed attempts → agent keeps patching forever | 3 failures → agent stops and asks if the approach is wrong |
+| Bug fixes skip quality gates | Even one-line fixes go through review |
+
+---
+
+## Works With Your Agent, Whatever It Is
+
+| Platform | Support |
+|----------|:------:|
+| Claude Code | ✅ Native |
+| Codex CLI | ✅ Native (config tip in `codex-port/`) |
+| Gemini CLI | ✅ Native |
+| Copilot CLI | ✅ Native |
+| Any SKILL.md-compatible agent | ✅ |
+
+ADD uses the standard `SKILL.md` format. Copy it to your agent's skills directory and it works.
+
+---
+
+## How to Use It
+
+### Starting something new
+```
+"I want to build a photo browser. Use ADD."
+```
+Agent brainstorms with you → writes acceptance criteria → you approve → builds everything.
+
+### Picking up where you left off
+```
+"Continue developing my project"
+```
+Agent reads the AC table, finds remaining `[ ]` items, batch-processes all of them.
+
+### Adding a feature mid-project
+```
+"Add a snooze button to the alarm"
+```
+Agent updates the AC FIRST, proposes an approach, waits for your confirmation, then implements. No silent feature creep.
+
+### Fixing a bug
+```
+"This button crashes when I click it"
+```
+Agent greps callers, demotes affected ACs, fixes the root cause (not just the symptom), self-reviews.
+
+---
+
+## The 6 AC Statuses
+
+| Mark | Meaning |
+|------|---------|
+| `[ ]` | Not implemented yet — agent will work on it |
+| `[~]` | Partially done — known edge issues remain |
+| `[x]` | Verified and passing |
+| `[!]` | Implemented — needs your hands-on test |
+| `[-]` | Deprecated |
+| `[>]` | Deferred — good idea, not now. Has an upgrade trigger ("when user count > 1000") |
+
+---
+
+## 🔥 Level Up with Superpowers
+
+ADD works standalone. But if you have the [Superpowers skill pack](https://github.com/anthropics/superpowers) installed, it gets significantly stronger:
+
+| Superpowers skill | How ADD uses it |
+|-------------------|-----------------|
+| `brainstorming` | Deep interactive design discussions for new projects and large changes |
+| `writing-plans` | Structured task decomposition for complex features |
+| `subagent-driven-development` | Independent subagents execute each task with proper review |
+| `test-driven-development` | Quality ACs force TDD workflows |
+| `verification-before-completion` | Fresh verification output required before any `[x]` marker |
+| `finishing-a-development-branch` | Clean branch completion after all ACs pass |
+
+Without Superpowers, ADD still works but these steps run as direct implementation. With Superpowers, they become full professional workflows. Install when you're ready for the upgrade.
+
+---
+
+## 🔗 The Experience Loop (Obsidian + project-experience)
+
+ADD ships with a companion skill: `project-experience`.
+
+When ADD finishes a project, it generates a project document (tech stack, architecture, reusable patterns, edge cases, pitfalls). When you start your NEXT project, `project-experience` reads all past project docs and extracts:
+
+- **Your coding preferences** — "They always use QtConcurrent for async, not raw threads"
+- **Pitfalls you've already solved** — "vcpkg path was hardcoded before, they fixed it with `$$PWD/bin`"
+- **Reusable patterns** — "Generation Counter pattern appears in 3 projects"
+- **Quality baseline** — "They target 70%+ test coverage on core algorithms"
+
+This means each project makes every future project better. If you use Obsidian, Dataview auto-generates your project index. Don't use Obsidian? Any folder works — the skill auto-discovers your docs.
 
 ---
 
 ## Installation
 
-### 1. Install Superpowers (if not already)
-
-Required sub-skills: `brainstorming` `writing-plans` `subagent-driven-development` `test-driven-development` `verification-before-completion` `finishing-a-development-branch`
-
-If missing, the skill degrades gracefully — it tells you what's unavailable.
-
-### 2. Copy Skill Files
-
+### 1. Copy Skills
 ```
 skills/acceptance-driven-development/  →  ~/.claude/skills/acceptance-driven-development/
 skills/project-experience/             →  ~/.claude/skills/project-experience/
 ```
+(Path varies by platform — see your agent's docs for the skills directory)
 
-Windows: `C:\Users\<you>\.claude\skills\`
+### 2. Copy Templates
+Copy `projects/templates/` files into your project docs folder.
 
-### 3. Copy Templates
+### 3. Restart your agent
+Skills load on the next session.
 
-Create a `projects/` folder in any directory (Obsidian vault or plain folder). Copy the template files there.
-
-### 4. Restart Claude Code
-
-New skills load on the next session.
-
-### 5. Verify
-
+### 4. Verify
 Type `/skills` — you should see `acceptance-driven-development` and `project-experience`.
-
----
-
-## AC Statuses
-
-| Mark | Meaning | Who decides |
-|------|---------|-------------|
-| `[ ]` | Not implemented | — |
-| `[~]` | Partially done | Agent or user |
-| `[x]` | Verified | Agent runs verification |
-| `[!]` | Implemented, needs user check | Agent marks, user confirms |
-| `[-]` | Deprecated | Agent or user |
-| `[>]` | Deferred / backlog | Agent or user |
-
----
-
-## Usage
-
-### New Project
-
-```
-"I want to build a photo browser. Use ADD skill."
-```
-
-Agent: Gate 1 brainstorming → design doc → you review → Gate 2 AC → you approve → batch execution.
-
-### Existing Project
-
-```
-"Implement AC-41 through AC-54 for my project"
-```
-
-Agent batch-executes, no interruption.
-
-### Mid-Development Change
-
-```
-"Tags can't be deleted — add a delete button"
-```
-
-Agent updates AC first (Phase 3.5), asks for your confirmation, then implements.
 
 ---
 
 ## Example Project
 
-See `projects/AlarmClock/AC.md` for a complete acceptance criteria document.
-
----
-
-## Dependencies
-
-| Name | Type | Required? |
-|------|------|------|
-| Superpowers skill pack | Public | Recommended (degrades gracefully) |
-| project-experience | Included here | ✅ Yes |
-| Obsidian Vault | Software | No — any folder works |
+See `projects/AlarmClock/` for a complete worked example:
+- `AC.md` — 22 acceptance criteria covering features, compatibility, performance, and quality
+- `AlarmClock.md` — The project document that `project-experience` reads
 
 ---
 
 ## FAQ
 
-**Q: Agent can't find my project docs?**
-A: The skill searches `~` for `.obsidian/` or `AC.md` files, checks the current directory, then asks you.
+**Q: Does this slow me down?**
+A: The overhead is ~2 minutes per change (impact analysis + self-review). It saves hours of debugging and rework.
 
 **Q: Can I use this without Superpowers?**
-A: Yes. The skill tells you what's missing and degrades — you lose brainstorming, TDD, and code review but the core AC loop still works.
+A: Yes — ADD degrades gracefully. You get the core AC loop, self-review, and hard gates without anything extra.
 
-**Q: Agent says "done" but ACs still show `[ ]`?**
-A: Phase 6 hard gate prohibits this. If it happens, confirm the skill file was copied correctly and Claude Code was restarted.
+**Q: What if my agent skips the process?**
+A: ADD has 6 hard gates (confirmation requirements, exit blockers, rationalization counters). If the agent still skips, asking "Did you go through Mode B?" is your last line of defense — and it works.
 
-**Q: What's the difference between `[!]` and `[~]`?**
-A: `[!]` = Agent implemented it but can't verify (needs you to test). `[~]` = Agent implemented it partially (known edge issues remain).
+**Q: Does this work with non-code projects?**
+A: ADD is designed for software development. The AC table structure works best for projects with verifiable behavior.
 
-**Q: Mode A vs Mode B?**
-A: Mode A = batch all `[ ]` items with subagent review. Mode B = lightweight single change (1-2 ACs) with self-review. Both go through Phase 3.5 first.
+**Q: What about existing projects without AC docs?**
+A: Phase 0 detects missing AC files and triggers the Greenfield process — brainstorming, design doc, AC creation.
