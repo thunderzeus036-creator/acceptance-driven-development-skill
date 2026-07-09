@@ -98,7 +98,7 @@ Project doc auto-generated ──► Next project learns from this one ✦
 | `[x]` | Verified and passing |
 | `[!]` | Implemented — needs your hands-on test |
 | `[-]` | Deprecated |
-| `[>]` | Deferred — good idea, not now. Has upgrade trigger ("when user count > 1000") |
+| `[>]` | Deferred — user's decision to postpone. Agent skips entirely unless user asks |
 
 Your entire project lives in one markdown file — a single source of truth that both you and the agent can read.
 

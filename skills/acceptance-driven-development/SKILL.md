@@ -143,7 +143,7 @@ Read the AC table. For each row, read the status column:
 | `[x]` | Verified passing | Skip |
 | `[-]` | Deprecated | Skip |
 | `[!]` | Implemented, awaiting user | → Phase 6 checklist |
-| `[>]` | Deferred / backlog | Skip — not now, but don't forget. |
+| `[>]` | Deferred / backlog | Skip. This is a user-facing marker — agent does NOT suggest implementing it unless the user explicitly requests it. |
 
 No `[ ]` items? → the AC table is up to date. If the user requested a change, proceed to Phase 3.5. If just checking status, present the `[!]` checklist.
 
