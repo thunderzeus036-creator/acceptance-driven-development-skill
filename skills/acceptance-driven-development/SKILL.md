@@ -322,7 +322,7 @@ After marking all items, proceed to Phase 6 to check completion.
 
 ## Phase 6: Complete (HARD GATE)
 
-**Done when:** Every AC is `[x]`, `[!]`, `[~]`, `[-]`, or `[>]`. No `[ ]` remains.
+**Agent work done when:** No `[ ]` remains. **Project complete (docs ready) when:** Every AC is `[x]`, `[>]`, or `[-]` — no `[ ]`, `[!]`, or `[~]`.
 
 ```
 Phase 5 →
@@ -334,7 +334,9 @@ Phase 5 →
 
 **`[!]` → `[x]` loop:** When `[!]` items exist, present them as a user checklist with specific instructions. Wait for the user to test and confirm each one. After each confirmation → immediately mark `[x]`. Repeat until zero `[!]` remain.
 
-**Project document:** When zero `[ ]` AND zero `[!]` remain, create a project document at `<VAULT>/projects/<ProjectName>/<ProjectName>.md`. Follow the project doc template structure: one-line overview, tech stack, architecture, core modules, edge cases, reusable patterns, technical debt, and overall assessment. This document is read by `project-experience` in future projects — without it, the experience loop is broken.
+**`[~]` → settle:** When `[~]` items exist, ask the user: fix remaining issues → `[x]`, or defer → `[>]`, or deprecate → `[-]`. Every item needs a settled outcome.
+
+**Project document:** When every AC is `[x]`, `[>]`, or `[-]` — no `[ ]`, `[!]`, or `[~]` — create a project document at `<VAULT>/projects/<ProjectName>/<ProjectName>.md`. Each item must have a settled outcome: verified done, explicitly deferred, or explicitly deprecated. Follow the project doc template structure: one-line overview, tech stack, architecture, core modules, edge cases, reusable patterns, technical debt, and overall assessment. This document is read by `project-experience` in future projects — without it, the experience loop is broken.
 
 **Experience cache update:** After the project document is created, ask the user:
 
@@ -358,7 +360,7 @@ Phase 5 →
 | 4 | Implement | Mode A: batch all [ ] / Mode B: lightweight (user-requested change) |
 | 4.8 | Review | Mode A: subagent review / Mode B: self-review (Wiring + Safety + Fidelity + State + Impact) |
 | 5 | Verify + mark | AUTO → command → `[x]` / MANUAL,BLOCKED → `[!]` / Mode B [!] → user confirms → `[x]` |
-| 6 | Complete | `[ ]` exists? → Phase 4. `[!]` exists? → user test → `[x]`. Project doc when zero `[ ]` & `[!]` |
+| 6 | Complete | `[!]` → user test → `[x]`. `[~]` → settle to `[x]`/`[>]`/`[-]`. Project doc when all `[x]` `[>]` `[-]` |
 
 ---
 
