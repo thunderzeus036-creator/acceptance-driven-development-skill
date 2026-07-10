@@ -3,7 +3,7 @@
 <p align="center">
   <b>The AI skill pack that makes "done" a checklist, not a feeling.</b><br>
   Works with Claude Code · Codex CLI · Gemini CLI · Copilot CLI<br>
-  <sub>[English](#en-start) | [中文](#cn-start)</sub>
+  <sub>[English](#user-content-en-start) | [中文](#user-content-cn-start)</sub>
 </p>
 
 <a id="en-start"></a>
@@ -229,7 +229,7 @@ A: Phase 0 detects this and triggers the full setup — brainstorming → design
 <p align="center">
   <b>让"完成"变成一份清单，而不是一种感觉的 AI 技能包。</b><br>
   适用于 Claude Code · Codex CLI · Gemini CLI · Copilot CLI<br>
-  <sub>[English](#en-start) | [中文](#cn-start)</sub>
+  <sub>[English](#user-content-en-start) | [中文](#user-content-cn-start)</sub>
 </p>
 
 <a id="cn-start"></a>
