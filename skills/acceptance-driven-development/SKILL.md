@@ -98,7 +98,7 @@ All project ACs, project docs, templates, and the experience cache live under a 
 
 1. `Glob pattern="**/.exp_memory.md" path="~"` — search home directory for the experience cache anchor file
    - **Found** → `$DOC_HUB` = the directory containing `.exp_memory.md`. Skip to Step 0.2.
-   - **Not found** → ask the user once: "Where should project documents be stored? (Recommended: ~/project-docs/ — just give me a path, I'll create the needed files there)"
+   - **Not found** → ask the user once: "I need a central directory to store acceptance criteria and project experience for ALL your projects. This directory will be shared across projects, so pick a stable location — don't put it inside a specific project folder. Suggested: ~/project-docs/ (just give me the path; I'll create the needed files there.)"
      → `$DOC_HUB` = user's answer. Create the directory. **Immediately create `$DOC_HUB/.exp_memory.md`** with `# Project Experience Cache\n\n> No completed projects yet.` so other sessions discover the hub immediately.
 
 **Step 0.2 — Find project AC:**
