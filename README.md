@@ -3,7 +3,7 @@
 <p align="center">
   <b>The AI skill pack that makes "done" a checklist, not a feeling.</b><br>
   Works with Claude Code · Codex CLI · Gemini CLI · Copilot CLI<br>
-  <sub>English | [中文](README-zh.md)</sub>
+  <sub>English | <a href="README-zh.md">中文</a></sub>
 </p>
 
 ## The Problem We've All Had

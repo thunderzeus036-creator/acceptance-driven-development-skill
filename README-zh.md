@@ -3,7 +3,7 @@
 <p align="center">
   <b>让"完成"变成一份清单，而不是一种感觉的 AI 技能包。</b><br>
   适用于 Claude Code · Codex CLI · Gemini CLI · Copilot CLI<br>
-  <sub>[English](README.md) | 中文</sub>
+  <sub><a href="README.md">English</a> | 中文</sub>
 </p>
 
 ## 我们共同遇到的问题
