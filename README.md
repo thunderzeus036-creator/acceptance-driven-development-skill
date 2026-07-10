@@ -3,9 +3,10 @@
 <p align="center">
   <b>The AI skill pack that makes "done" a checklist, not a feeling.</b><br>
   Works with Claude Code · Codex CLI · Gemini CLI · Copilot CLI<br>
-  <sub>[English](#the-problem-weve-all-had) | [中文](#我们共同遇到的问题)</sub>
+  <sub>[English](#en-start) | [中文](#cn-start)</sub>
 </p>
 
+<a id="en-start"></a>
 ## The Problem We've All Had
 
 You ask an AI agent to build something. It writes code. It compiles. It says **"Done!"**
@@ -228,8 +229,11 @@ A: Phase 0 detects this and triggers the full setup — brainstorming → design
 <p align="center">
   <b>让"完成"变成一份清单，而不是一种感觉的 AI 技能包。</b><br>
   适用于 Claude Code · Codex CLI · Gemini CLI · Copilot CLI<br>
-  <sub>[English](#the-problem-weve-all-had) | [中文](#我们共同遇到的问题)</sub>
+  <sub>[English](#en-start) | [中文](#cn-start)</sub>
 </p>
+
+<a id="cn-start"></a>
+# 验收驱动开发 (ADD)
 
 ## 我们共同遇到的问题
 
