@@ -23,7 +23,7 @@ New task received ──► Is it code/architecture/dependency related?
                     │
               ┌─────┴──────┐
               ▼            ▼
-     .exp_memory.md?    .exp_memory.md?
+     _exp_memory.md?    _exp_memory.md?
          YES              NO
           │                │
           ▼                ▼
@@ -56,10 +56,10 @@ All project documents and the experience cache live under a single directory (`$
 
 ### Step 0.1: Discover $DOC_HUB via the cache anchor
 
-1. `Glob pattern="**/.exp_memory.md" path="~"` — search home directory for the experience cache anchor
-   - **Found** → `$DOC_HUB` = the directory containing `.exp_memory.md`. Skip to Step 0.3.
+1. `Glob pattern="**/_exp_memory.md" path="~"` — search home directory for the experience cache anchor
+   - **Found** → `$DOC_HUB` = the directory containing `_exp_memory.md`. Skip to Step 0.3.
    - **Not found** → ask the user once: "I need a central directory to store acceptance criteria and project experience for ALL your projects. This directory will be shared across projects, so pick a stable location — don't put it inside a specific project folder. Suggested: ~/project-docs/ (just give me the path; I'll create the needed files there.)"
-     → `$DOC_HUB` = user's answer. Create directory if needed. **Immediately create `$DOC_HUB/.exp_memory.md`** with `# Project Experience Cache\n\n> No completed projects yet.` so other sessions discover the hub immediately.
+     → `$DOC_HUB` = user's answer. Create directory if needed. **Immediately create `$DOC_HUB/_exp_memory.md`** with `# Project Experience Cache\n\n> No completed projects yet.` so other sessions discover the hub immediately.
 
 ### Step 0.2: Find project documents
 
@@ -70,7 +70,7 @@ Store `$DOC_HUB` for all subsequent paths.
 
 ### Step 0.3: Check experience cache
 
-Check if `$DOC_HUB/.exp_memory.md` exists:
+Check if `$DOC_HUB/_exp_memory.md` exists:
 
 - **YES** → read it. Skip Phase 1 (Survey) and Phase 3 (Extract). Go directly to Phase 2 to match cache entries against the current task. The cache already contains distilled results from all completed projects.
 - **NO** → proceed with full Phase 1–5. After Phase 5, save the cache (see Phase 6).
@@ -94,7 +94,7 @@ This takes under 15 seconds.
 
 ## Phase 2: Match — Find Relevant Projects
 
-**If reading from cache (Step 0.3 = YES):** scan the `Known Pitfalls`, `Reusable Patterns`, and `Coding Conventions` sections of `$DOC_HUB/.exp_memory.md`. Match entries to the current task by keywords and context. Skip the project-tag matching below. After matching → go to Phase 4 to synthesize the briefing from cache entries.
+**If reading from cache (Step 0.3 = YES):** scan the `Known Pitfalls`, `Reusable Patterns`, and `Coding Conventions` sections of `$DOC_HUB/_exp_memory.md`. Match entries to the current task by keywords and context. Skip the project-tag matching below. After matching → go to Phase 4 to synthesize the briefing from cache entries.
 
 **If running full cycle (Step 0.3 = NO):** read the frontmatter tags of each project document and compare against the current task:
 
@@ -180,7 +180,7 @@ The briefing is your constraint system. For every subsequent decision:
 1. **Choose a library** → check Pitfalls to Avoid
 2. **Design a module** → check Reusable Patterns
 3. **Write boilerplate** → check Coding Preferences
-4. **In doubt** → cache mode: re-read `$DOC_HUB/.exp_memory.md`; full-cycle mode: re-read the relevant project document in `$DOC_HUB/<ProjectName>/`
+4. **In doubt** → cache mode: re-read `$DOC_HUB/_exp_memory.md`; full-cycle mode: re-read the relevant project document in `$DOC_HUB/<ProjectName>/`
 
 **Reference the briefing explicitly in your responses:**
 
@@ -188,7 +188,7 @@ The briefing is your constraint system. For every subsequent decision:
 
 ## Phase 6: Save Experience Cache
 
-After completing the full extraction cycle (Phases 1–5), save the distilled experience to `$DOC_HUB/.exp_memory.md`:
+After completing the full extraction cycle (Phases 1–5), save the distilled experience to `$DOC_HUB/_exp_memory.md`:
 
 ```markdown
 # Project Experience Cache
@@ -223,14 +223,14 @@ After completing the full extraction cycle (Phases 1–5), save the distilled ex
 
 | Phase | Action | Time |
 |-------|--------|------|
-| 0. Locate | Discover $DOC_HUB via ~/.exp_memory.md | 5s |
-| 0.3 Cache | Check $DOC_HUB/.exp_memory.md → skip Phase 1+3 if exists | 2s |
+| 0. Locate | Discover $DOC_HUB via ~/_exp_memory.md | 5s |
+| 0.3 Cache | Check $DOC_HUB/_exp_memory.md → skip Phase 1+3 if exists | 2s |
 | 1. Survey | Read index + glob $DOC_HUB/*/*.md | 10s |
 | 2. Match | Compare tags vs task (or cache entries vs task) | 5s |
 | 3. Extract | Read targeted sections from 1-2 project docs | 30-60s |
 | 4. Synthesize | Write briefing to context | 30s |
 | 5. Apply | Reference briefing in all subsequent decisions | Ongoing |
-| 6. Save | Write briefing to $DOC_HUB/.exp_memory.md (first run only) | 10s |
+| 6. Save | Write briefing to $DOC_HUB/_exp_memory.md (first run only) | 10s |
 
 **Total overhead: ~2 minutes (first run) / ~15 seconds (cache hit).**
 
@@ -239,9 +239,9 @@ After completing the full extraction cycle (Phases 1–5), save the distilled ex
 | Mistake | Why it happens | Fix |
 |---------|---------------|-----|
 | Using relative paths | Working directory may be anywhere | Always use absolute paths from `$DOC_HUB` |
-| Skipping Phase 0 | "I already know where the docs are" | Always verify: search ~/.exp_memory.md first, then fallback to ask. |
+| Skipping Phase 0 | "I already know where the docs are" | Always verify: search ~/_exp_memory.md first, then fallback to ask. |
 | Not writing the briefing | "I'll remember what I read" | Without a written briefing, lessons fade within 10 message turns. Write it down. |
 | Ignoring ✅ resolved items | "That's already fixed, not relevant" | Resolved items show exactly what patterns to use INSTEAD. |
 | Reading entire project docs | "More context is better" | Trust the section mapping table. Targeted reading is faster and cleaner. |
 | Not citing sources | "The author knows their own projects" | Citations show your reasoning is evidence-based, not generic advice. |
-| Skipping cache check | "I'll just run the full cycle" | Always check `$DOC_HUB/.exp_memory.md` first. Cache hit saves 2 minutes. |
+| Skipping cache check | "I'll just run the full cycle" | Always check `$DOC_HUB/_exp_memory.md` first. Cache hit saves 2 minutes. |

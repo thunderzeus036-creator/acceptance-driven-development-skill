@@ -198,8 +198,8 @@ A: Phase 0 detects this and triggers the full setup — brainstorming → design
 ### v1.2 — Unified Document Hub (2026-07-10)
 
 - **`$DOC_HUB` centralized architecture**: all ACs, project docs, templates, and experience cache under one directory independent of code
-- **`~/.exp_memory.md` anchor discovery**: auto-locate hub across sessions and windows — no repeated path prompts
-- **Immediate placeholder**: `.exp_memory.md` created on first setup, not waiting for project completion — prevents parallel-session conflicts
+- **`~/_exp_memory.md` anchor discovery**: auto-locate hub across sessions and windows — no repeated path prompts
+- **Immediate placeholder**: `_exp_memory.md` created on first setup, not waiting for project completion — prevents parallel-session conflicts
 - **Improved onboarding prompt**: explains purpose (shared across all projects), warns against project-specific paths
 - **`memory.md` → `exp_memory.md`**: renamed to avoid name collisions with Claude's own memory files
 - **6-item review checklist**: Framework-specific checks added as the 6th item (Wiring, Safety, Fidelity, State, Impact, Framework)

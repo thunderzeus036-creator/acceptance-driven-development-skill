@@ -96,10 +96,10 @@ All project ACs, project docs, templates, and the experience cache live under a 
 
 **Step 0.1 — Discover $DOC_HUB via the cache anchor:**
 
-1. `Glob pattern="**/.exp_memory.md" path="~"` — search home directory for the experience cache anchor file
-   - **Found** → `$DOC_HUB` = the directory containing `.exp_memory.md`. Skip to Step 0.2.
+1. `Glob pattern="**/_exp_memory.md" path="~"` — search home directory for the experience cache anchor file
+   - **Found** → `$DOC_HUB` = the directory containing `_exp_memory.md`. Skip to Step 0.2.
    - **Not found** → ask the user once: "I need a central directory to store acceptance criteria and project experience for ALL your projects. This directory will be shared across projects, so pick a stable location — don't put it inside a specific project folder. Suggested: ~/project-docs/ (just give me the path; I'll create the needed files there.)"
-     → `$DOC_HUB` = user's answer. Create the directory. **Immediately create `$DOC_HUB/.exp_memory.md`** with `# Project Experience Cache\n\n> No completed projects yet.` so other sessions discover the hub immediately.
+     → `$DOC_HUB` = user's answer. Create the directory. **Immediately create `$DOC_HUB/_exp_memory.md`** with `# Project Experience Cache\n\n> No completed projects yet.` so other sessions discover the hub immediately.
 
 **Step 0.2 — Find project AC:**
 
@@ -115,7 +115,7 @@ All project ACs, project docs, templates, and the experience cache live under a 
 
 #### Gate 1: Design Document
 1. Announce: "New project — no AC yet. Let's clarify the goals first."
-2. **Check experience cache:** Read `$DOC_HUB/.exp_memory.md` if it exists. Scan `Known Pitfalls` and `Reusable Patterns` for anything relevant to the new project's domain or tech stack. Mention relevant findings during design discussion.
+2. **Check experience cache:** Read `$DOC_HUB/_exp_memory.md` if it exists. Scan `Known Pitfalls` and `Reusable Patterns` for anything relevant to the new project's domain or tech stack. Mention relevant findings during design discussion.
 3. **Climb the solution ladder** before designing — stop at the first rung that holds:
    1. Already in this codebase? (reuse existing code)
    2. Standard library does it?
@@ -204,7 +204,7 @@ Before writing code, grep for callers of the function(s) you're about to modify.
 
 **Default to Medium when uncertain.** If a change could be Small or Medium, classify it as Medium. The cost of over-discussing (1 extra minute) is lower than the cost of wrong direction (hours of rework).
 
-**Check experience cache (all sizes):** Before proposing an approach, read `$DOC_HUB/.exp_memory.md` (the global experience cache maintained by `project-experience`). Scan the `Known Pitfalls` and `Reusable Patterns` sections for anything relevant to the current change. This is a 2-second scan — don't re-load project-experience, just read the file. If you find a relevant pitfall or pattern, mention it when presenting your approach to the user.
+**Check experience cache (all sizes):** Before proposing an approach, read `$DOC_HUB/_exp_memory.md` (the global experience cache maintained by `project-experience`). Scan the `Known Pitfalls` and `Reusable Patterns` sections for anything relevant to the current change. This is a 2-second scan — don't re-load project-experience, just read the file. If you find a relevant pitfall or pattern, mention it when presenting your approach to the user.
 
 **Every size includes a discussion step — except fast-lane bug fixes** (impact analysis → mode announcement → implement). After updating AC, present your proposed approach and wait for the user to say "approved"/"go ahead" before writing code.
 
@@ -364,7 +364,7 @@ Phase 5 →
 
 > "Project complete. Update the experience cache? Recommended — this writes today's pitfalls and reusable patterns into cache so future projects get a ~15s fast path instead of a full scan."
 
-- **Yes** → delete `$DOC_HUB/.exp_memory.md` (so project-experience sees no cache and runs full extraction), then `Skill("project-experience")`. It will detect the missing cache, run Phase 1–5 across all projects (including the newly completed one), and save the updated cache. Tell the user: "Next project loads experience in ~15 seconds."
+- **Yes** → delete `$DOC_HUB/_exp_memory.md` (so project-experience sees no cache and runs full extraction), then `Skill("project-experience")`. It will detect the missing cache, run Phase 1–5 across all projects (including the newly completed one), and save the updated cache. Tell the user: "Next project loads experience in ~15 seconds."
 - **No** → completion is done. Remind the user they can update the cache later by saying "update experience cache".
 
 ---
@@ -374,7 +374,7 @@ Phase 5 →
 | Phase | Action | Key |
 |-------|--------|-----|
 | 🚨 | **FIRST RULE** | ALL code changes → Phase 3.5 first. Phase 3.5 is the only path to Phase 4. |
-| 0 | Locate doc hub + AC | Search ~/.exp_memory.md → $DOC_HUB. New project → Gate 1 (brainstorm) → Gate 2 (AC) |
+| 0 | Locate doc hub + AC | Search ~/_exp_memory.md → $DOC_HUB. New project → Gate 1 (brainstorm) → Gate 2 (AC) |
 | 1 | Triage statuses | `[ ]` `[~]` `[x]` `[-]` `[!]` `[>]` |
 | 2 | Sort by dependency | Features→Compat→Perf→Quality. No labels? Infer from content |
 | 3 | Classify verifiability | AUTO ✅ / MANUAL ⚠️ / BLOCKED 🚫 |
